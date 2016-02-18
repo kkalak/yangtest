@@ -21,7 +21,7 @@
 			$('#roomDate').text($('#roomDateText').val());
 		});
 		
-		//사용정보->회의실사용시간
+		//사용정보->회의실사용시간...(미완성)
 		
 		$('input:checkbox[id="roomTimeId"]').on('click', function(){			
 			var n = $( "input:checked" ).length;			 
