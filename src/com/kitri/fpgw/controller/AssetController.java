@@ -2,12 +2,15 @@ package com.kitri.fpgw.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.fpgw.model.CodeManageDto;
+import com.kitri.fpgw.model.UserDto;
 import com.kitri.fpgw.service.MainService;
 
 @Controller
@@ -28,7 +31,7 @@ public class AssetController {
 		
 		return mav;
 	}
-	
+		
 	@RequestMapping(value="/managebook.html")
 	public ModelAndView selectBook() throws Exception{
 		
@@ -42,12 +45,16 @@ public class AssetController {
 	}
 	
 	@RequestMapping(value="/reserveasset.html")
-	public ModelAndView selectReserve() throws Exception{
+	public ModelAndView selectReserve(HttpSession session) throws Exception{
 		
 		ArrayList<CodeManageDto> list = MainService.CodeManageSelectAll();
 		
-		ModelAndView mav = new ModelAndView();			
-		mav.addObject("list", list);
+		// User 정보 얻어오기
+		/*UserDto ud = (UserDto)session.getAttribute("userInfo");
+		String name = ud.getStrID();*/
+		
+		ModelAndView mav = new ModelAndView();		
+		mav.addObject("list", list);		
 		mav.setViewName("jsp/asset/reserveasset");
 		
 		return mav;
