@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="root" value="${pageContext.request.contextPath }" />
+<c:set var="name" value="${name}" />
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="${root}/css/bootstrap.min.css">
 <script type="text/javascript" src="${root}/js/jquery.min.js"></script>
 <script type="text/javascript">
+var roomTime = '';
 	$(document).ready(function(){
 		
 		//사용정보->회의실
@@ -16,23 +18,45 @@
 		});
 		
 		//사용정보->회의실사용날짜
-		$('#roomDate').text($('#roomDateText').val());
-		$('#roomDateText').change(function(){
-			$('#roomDate').text($('#roomDateText').val());
+		$('#roomDate').text($('#roomDateId').val());
+		$('#roomDateId').change(function(){
+			$('#roomDate').text($('#roomDateId').val());
 		});
-		
-		//사용정보->회의실사용시간...(미완성)
-		
-		$('input:checkbox[id="roomTimeId"]').on('click', function(){			
-			var n = $( "input:checked" ).length;			 
-			$('#roomTime').text((n === 0 ? " " : n+" 시간"));
-		});	
-	})
+			
+		//사용정보->회의실사용시간...()
+		$('input[id="roomTimeId"]').on('click', function(){
+			var valueArr = new Array();
+			var list = $('input[id="roomTimeId"]');
+			for(var i=0;i<list.length;i++){
+				if(list[i].checked){
+					valueArr.push(list[i].value);
+				}
+			}
+			var str = '';
+			var n = 0;
+			for(var i in valueArr){
+				str += valueArr[i]+' ';
+				n++;
+			}
+			roomTime = str+(n === 0 ? ' ' : '('+n+' 시간)');
+			$('#roomTime').text(str+(n === 0 ? ' ' : '('+n+' 시간)'));
+		});
 
-
+	});
 	
+	function a(){
+		document.roomForm.action = '${root}/asset/reserveasset.html';
+		document.roomForm.submit();
+		
+	}
 	
-	
+/* 	function b(){
+		$('#roomDateId').setText('');
+		
+		$('#roomName').text('');
+		$('#roomDate').text('');
+		$('#roomTime').text('');
+	} */
 	//사용정보->차량
 	
 	//사용정보->차량사용날짜
@@ -84,18 +108,19 @@
 							aria-expanded="false">공용장비 예약신청</a></li>
 					</ul>
 					<div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12">
+					<form name="roomForm">
 						<div role="tabpanel" class="tab-pane fade active in" id="tabs-demo7-area1" aria-labelledby="tabs-demo7-area1">
 							<div class="col-md-12 well">
 								<div class="col-md-4" style="margin-top: 10px;">
 									<div class="panel">
 										<div class="panel-body">
 											<div class="form-group form-animate-text">
-												<span class="bar"></span> <input id="roomDateText" type="text" class="form-text date" required> <span class="bar"></span>
+												<span class="bar"></span> <input id="roomDateId" type="text" class="form-text date" required> <span class="bar"></span>
 												<label><span class="icons icon-calendar"></span> 날짜	선택</label>
 											</div>
 										</div>
 									</div>
-								</div>						
+								</div>				
 								
 								<div class="col-md-4">
 									<div class="panel">
@@ -105,7 +130,7 @@
 													class="icons icon-people"></span> 회의실 선택</label>
 												<div class="col-sm-12" style="margin-top: 40px;">
 													<select id="roomSelect" class="form-control" >
-																<option>---------- Default Select ----------</option>
+																<option roomName="">---------- Default Select ----------</option>
 														<c:forEach var="confList" items="${list}">
 															<c:if test="${confList.strBCode eq 710 && confList.intUse_Flag eq 1}">
 																<option value="${confList.strSCode}" roomName="${confList.strName}">${confList.strName}</option>
@@ -126,8 +151,8 @@
 												<div class="col-sm-12" style="margin-top: 40px;">
 												<c:forEach var="timeList" items="${list}">
 													<c:if test="${timeList.strBCode eq 700 && timeList.intUse_Flag eq 1}">
-														<div class="col-sm-12">
-															<input id="roomTimeId" type="checkbox" name="${timeList.strSCode}" value="${timeList.strSCode}">&nbsp;${timeList.strValue1}&nbsp;${timeList.strValue2}&nbsp;-&nbsp;${timeList.strValue3}&nbsp;${timeList.strValue4}<br>
+														<div class="col-sm-12">															
+															<input id="roomTimeId" type="checkbox" value="&nbsp;${timeList.strValue1}&nbsp;-&nbsp;${timeList.strValue2}">&nbsp;${timeList.strValue1}&nbsp;-&nbsp;${timeList.strValue2}<br>
 														</div>
 													</c:if>
 												</c:forEach>
@@ -139,9 +164,7 @@
 								<div class="col-md-6">
 									<div class="panel">
 										<div class="panel-body">
-											<div>
-											이용사항
-											</div>											
+											<div>이용사항</div>											
 										</div>	
 									</div>
 								</div>
@@ -168,11 +191,12 @@
 									</div>
 								</div>
 								<div class="col-md-12">
-                          			<input type="button" class=" btn btn-round btn-primary" value="신청"/>
-                          			<input type="button" class="btn btn-round btn-danger" value="취소"/>
+                          			<input type="button" class=" btn btn-round btn-primary" value="신청" onclick="a()"/>
+                          			<input type="button" class="btn btn-round btn-danger" value="취소" onclick=""/>
                       			</div>                      		
 							</div>
 						</div>
+						</form>
 						<div role="tabpanel" class="tab-pane fade" id="tabs-demo7-area2" aria-labelledby="tabs-demo7-area2">
 							<div class="col-md-12 well">
 								<div class="col-md-4" style="margin-top: 10px;">

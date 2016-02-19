@@ -2,7 +2,7 @@ package com.kitri.fpgw.model;
 
 import java.util.Date;
 
-public class RentDetailDto {
+public class RantDetailDto {
 
 	private String strRDYmd;			//일자
 	private String strRDGetUser;		//등록자 == 요청자
@@ -16,11 +16,11 @@ public class RentDetailDto {
 	private String strRDRK;			//대여진행
 	private String strRDMemo;			//메모
 	
-	public RentDetailDto(){
+	public RantDetailDto(){
 		
 	}
 
-	public RentDetailDto(String strRDYmd, String strRDGetUser, Date datRDGetDate, String strRDStartTime,
+	public RantDetailDto(String strRDYmd, String strRDGetUser, Date datRDGetDate, String strRDStartTime,
 			String strRDEndTime, String strRDRantProd, int strRDSeq, String strRDChkUser, String strRDRKBcode,
 			String strRDRK, String strRDMemo) {
 

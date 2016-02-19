@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kitri.fpgw.model.CodeManageDto;
-import com.kitri.fpgw.model.UserDto;
+import com.kitri.fpgw.model.RantMainDto;
 import com.kitri.fpgw.service.MainService;
+import com.kitri.fpgw.service.RantService;
 
 @Controller
 @RequestMapping(value="/asset")
@@ -19,6 +21,10 @@ public class AssetController {
 	
 	@Autowired
 	private MainService MainService;
+	
+	@Autowired
+	private RantService RantService;
+
 	
 	@RequestMapping(value="/managecom.html")
 	public ModelAndView selectCom() throws Exception{
@@ -44,19 +50,28 @@ public class AssetController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/reserveasset.html")
+	@RequestMapping(value="/reserveasset.html", method=RequestMethod.GET)
 	public ModelAndView selectReserve(HttpSession session) throws Exception{
 		
 		ArrayList<CodeManageDto> list = MainService.CodeManageSelectAll();
 		
 		// User 정보 얻어오기
-		/*UserDto ud = (UserDto)session.getAttribute("userInfo");
-		String name = ud.getStrID();*/
+		/*UserDto user = (UserDto)session.getAttribute("userInfo");
+		System.out.println(user.getStrName());*/
 		
 		ModelAndView mav = new ModelAndView();		
-		mav.addObject("list", list);		
+		mav.addObject("list", list);
+		/*mav.addObject("name", name);*/
 		mav.setViewName("jsp/asset/reserveasset");
 		
 		return mav;
+	}
+	
+	@RequestMapping(value="/reserveasset.html", method=RequestMethod.POST)
+	public String reserve(RantMainDto rentMainDto) throws Exception{
+		
+		RantService.reserve(rentMainDto);
+		
+		return "redirect:/jsp/assest/reserveasset.jsp";
 	}
 }

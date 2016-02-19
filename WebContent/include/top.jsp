@@ -7,7 +7,7 @@
 <head>
 	
 	<meta charset="utf-8">
-	<meta name="description" content="GroupWare of KITRI DC16th EDUCATION TEAM No.2 Final Project">
+	<meta name="description" content="GroupWare System of KITRI DC16th Education Team No.2 Final Project">
 	<meta name="author" content="${sessionScope.coInfo[0].strName }">
 	<meta name="keyword" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,18 +27,23 @@
 	  
 	  <!-- plugins data tables css -->
 	  <link rel="stylesheet" type="text/css" href="${root }/css/plugins/datatables.bootstrap.min.css" />
-	
-	<link href="${root }/css/style.css" rel="stylesheet">		
+	  
+	<link href="${root }/css/style.css" rel="stylesheet">
 	<!-- end: Css -->
 
-	<link rel="shortcut icon" href="${root }/img/logomi.png">
+	<link rel="shortcut icon" href="${root }/img/logo.png">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
- 
+    <script src="${root }/js/jquery.min.js"></script>
+    <script src="${root }/js/jquery.ui.min.js"></script>
+    <script src="${root }/js/bootstrap.min.js"></script>
+ 	<script src="${root }/js/plugins/moment.min.js"></script>
+	<script src="${root }/js/plugins/fullcalendar.min.js"></script>
+	<script src="${root }/js/plugins/jquery.nicescroll.js"></script>
   </head>
 
  <body id="mimin" class="dashboard">
@@ -56,7 +61,7 @@
               </div>
               
               	<!-- 상단 회사명 -->
-                <a href="${root }/jsp/main/default.html" class="navbar-brand"> 
+                <a href="${root }/main/default.html" class="navbar-brand"> 
                  <b>${sessionScope.coInfo[0].strName }</b>
                 </a>
 
@@ -82,7 +87,7 @@
 	                <c:choose>
 	              		<c:when test="${sessionScope.success == 'ok' }">
 	              		
-	              			<img src="${root }${sessionScope.userInfo.strFace_Path }${sessionScope.userInfo.strFace_Name }" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+	              			<img src="${root }${sessionScope.userImageInfo.strFace_Path }${sessionScope.userImageInfo.strFace_Name }" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
 	              				
 	              		</c:when>
 	             	
@@ -146,10 +151,10 @@
                       				
                       					<c:if test="${secondMenu.intLevel eq 2 && firstMenu.strCode eq secondMenu.strPCode }">
                       						
-                      						<li><a class="tree-toggle1 nav-header" href="${root}${secondMenu.strPath}">${secondMenu.strName }
+                      						<li><a class="tree-toggle1 nav-header" href="${root}${secondMenu.strPath }">${secondMenu.strName }
                       								<span class="fa-angle-right fa right-arrow text-right"></span>
-                     								</a>
-                      						</li>
+                   								</a>
+                							</li>
                       							
                       					</c:if>
                       					
@@ -166,5 +171,5 @@
            		
             </div>
           <!-- end: Left Menu <include>-->
-	</div>
+
 </html>

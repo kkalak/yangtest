@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.kitri.fpgw.dao.MainDao;
 import com.kitri.fpgw.model.CodeManageDto;
+import com.kitri.fpgw.model.LogHistoryDto;
 import com.kitri.fpgw.model.MenuDto;
+import com.kitri.fpgw.model.UserDetaileDto;
 import com.kitri.fpgw.model.UserDto;
+import com.kitri.fpgw.model.UserImageDto;
+import com.kitri.fpgw.model.UserMainDto;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -17,12 +21,26 @@ public class MainServiceImpl implements MainService {
 	private MainDao MainDao;
 	
 	@Override
-	public UserDto Login(UserDto userIn) throws Exception {
+	public UserMainDto LogIn(UserMainDto userMainDto) throws Exception {
 		
-		return MainDao.LogIn(userIn);
+		return MainDao.LogIn(userMainDto);
 	}
 
 	
+	@Override
+	public UserDetaileDto UserDetailSelect(String strCode) throws Exception {
+
+		return MainDao.UserDetailSelect(strCode);
+	}
+
+
+	@Override
+	public UserImageDto UserImageSelect(String strCode) throws Exception {
+		
+		return MainDao.UserImageSelect(strCode);
+	}
+
+
 	@Override
 	public ArrayList<MenuDto> MenuSelectAll() throws Exception {
 		
@@ -57,6 +75,22 @@ public class MainServiceImpl implements MainService {
 		return MainDao.MainMessageList(Code);
 	}
 
+
+	@Override
+	public void LogCheck(LogHistoryDto LogHistoryDto) throws Exception {
+		
+		MainDao.LogCheck(LogHistoryDto);
+		
+	}
+
+
+	@Override
+	public ArrayList<CodeManageDto> CodeManageBCodeGroupSelectAll() throws Exception {
+		
+		return MainDao.CodeManageBCodeGroupSelectAll();
+	}
+
+	
 	
 	
 }

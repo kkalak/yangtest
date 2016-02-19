@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Rant">
+
+	<insert id="InsertReserve" parameterType="com.kitri.fpgw.model.RantMainDto">
+	
+		INSERT INTO RANT_MAIN SET
+		RM_YMD = #{strRMYmd},					RM_START_TIME = #{strRMStartTime},
+		RM_END_TIME = #{strRMEndTime},			RM_RANT_PROD = #{strRMRantProd},
+		RM_RANT_BCODE = #{strRMRantBcode},		RM_REQUEST_USER = #{strRMReqUser},
+		RM_APPROVAL_USESR = #{strRMApproUser},	RM_REQUEST_MEMO = #{strRMReqMemo},
+		RM_MEMO = #{strRMMemo}
+	
+	</insert>
+
+</mapper>

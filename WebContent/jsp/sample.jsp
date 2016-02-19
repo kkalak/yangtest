@@ -1,10 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath }"/>
+<!DOCTYPE html>
+<html lang="en">
 
 
-<!-- start: content -->
+<script type="text/javascript">
+
+	function c(){
+		
+		
+	}
+</script>
+<head>
+
+</head>
+<body>
+          <!-- start: content -->
             <div id="content">
                 <div class="panel">
                	
@@ -22,9 +34,9 @@
                 <div>
                 	<!-- 실제 화면 구동부분 -->
                 	
-                	게시판이다....
+                	
                 </div>
       		  </div>
           <!-- end: content -->
-
+</body>
 </html>
